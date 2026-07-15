@@ -60,17 +60,11 @@ jobs:
         with:
           name: python-app
       
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9EAA4096BFED4F1A89AA1183B68FC6AA }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E4A3532EFDAB407F879CCF5C3E5C057C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2F598B59E72946A696926AB54497CCFD }}
-
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'Movies-Recomm-System'
           slot-name: 'Production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           
